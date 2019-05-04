@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @pedido.cliente %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @pedido.total %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @pedido.fecha %>
+</p>
+
+<%= link_to 'Edit', edit_pedido_path(@pedido) %> |
+<%= link_to 'Back', pedidos_path %>
