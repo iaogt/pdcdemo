@@ -20,7 +20,7 @@ class PedidosControllerTest < ActionDispatch::IntegrationTest
       post pedidos_url, params: { pedido: { cliente: @pedido.cliente, fecha: @pedido.fecha, total: @pedido.total } }
     end
 
-    assert_redirected_to pedido_url(Pedido.first)
+    assert_redirected_to pedido_url(Pedido.last)
   end
 
   test "should show pedido" do
