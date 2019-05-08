@@ -1,0 +1,2 @@
+class FormularioController < ApplicationController
+end
