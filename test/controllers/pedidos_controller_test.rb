@@ -17,7 +17,7 @@ class PedidosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create pedido" do
     assert_difference('Pedido.count',assert_difference=1) do
-      get pedidos_url, params: { pedido: { cliente: @pedido.cliente, fecha: @pedido.fecha, total: @pedido.total } }
+      post pedidos_url, params: { pedido: { cliente: @pedido.cliente, fecha: @pedido.fecha, total: @pedido.total } }
     end
 
     assert_redirected_to pedido_url(Pedido.first)
