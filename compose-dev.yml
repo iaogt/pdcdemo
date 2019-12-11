@@ -1,0 +1,11 @@
+version: '3'
+services:
+  webdev:
+    build: 
+      context: .
+      dockerfile: DockerfileDev
+    volumes:
+      - .:/usr/src/app/demo
+    ports:
+    - "3000:3000"
+    command: ./entrypoint.sh
