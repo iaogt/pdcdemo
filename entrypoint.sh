@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /usr/src/app/demo
 bundle install
-./bin/rails test
+./bin/rails server -b 0.0.0.0

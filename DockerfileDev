@@ -2,5 +2,5 @@ FROM ruby:2.6.5
 RUN apt-get update 
 RUN apt-get install -y nodejs 
 COPY entrypoint.sh /
-CMD chmod 777 entrypoint.sh
 RUN gem install rails -v 5.2.3
+CMD chmod 777 entrypoint.sh
