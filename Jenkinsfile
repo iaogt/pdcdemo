@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                withDockerServer(['tcp://swarm.mycorp.com:2376']){
+                withDockerServer('tcp://swarm.mycorp.com:2376'){
                     // This step should not normally be used in your script. Consult the inline help for details.
                     withDockerContainer(args: '-p 3000:3000', image: 'iaogt/demorails:1.1') {
                         // some block
