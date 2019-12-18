@@ -7,11 +7,9 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
-                echo 'Building...'
-                docker.withServer('tcp://swarm.mycorp.com:2376'){
-                    docker.image('iaogt/demorails:1.1').withRun('-p 3000:3000')
-                }
+            echo 'Building...'
+            docker.withServer('tcp://swarm.mycorp.com:2376'){
+                docker.image('iaogt/demorails:1.1').withRun('-p 3000:3000')
             }
         }
     }
