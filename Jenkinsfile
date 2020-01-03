@@ -11,7 +11,7 @@ pipeline {
                 echo 'Building...'
                 withDockerServer([uri:'tcp://host.docker.internal:2376',credentialsId:'docker_swarm_vagrant']){
                     // This step should not normally be used in your script. Consult the inline help for details.
-                    withDockerContainer(args: '-p 3000:3000', image: 'iaogt/demorails:1.1') {
+                    withDockerContainer(args: '-p 3000:3000', image: 'iaogt/demorails:1.2') {
                         echo 'Testing ....'
                         script {
                             def output = sh returnStdout: true, script: '/usr/src/app/demo/rails test'
