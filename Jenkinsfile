@@ -12,7 +12,7 @@ pipeline {
                 withDockerServer([uri:'tcp://host.docker.internal:2376',credentialsId:'docker_swarm_vagrant']){
                     // This step should not normally be used in your script. Consult the inline help for details.
                     withDockerContainer(args: '-p 3000:3000', image: 'iaogt/demorails:1.3') {
-                        timeout(2){
+                        timeout(8){
                             echo 'Waiting for server ....'
                             sh 'wget --retry-connrefused --tries=120 --waitretry=1 -q http://localhost:3000/pedidos -O /dev/null'
                             echo 'Testing ....'
