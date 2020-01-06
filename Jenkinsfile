@@ -14,7 +14,7 @@ pipeline {
                     withDockerContainer(args: '-p 3000:3000 -u root:root', image: 'iaogt/demorails:1.3') {
                         timeout(8){
                             echo 'Waiting for server ....'
-                            sh 'wget --retry-connrefused --tries=120 --waitretry=1 -q http://localhost:3000/pedidos -O /dev/null'
+                            sh 'wget --retry-connrefused --tries=240 --waitretry=1 -q http://localhost:3000/pedidos -O /dev/null'
                             echo 'Testing ....'
                             script {
                                 sh ''
