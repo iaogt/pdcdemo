@@ -3,22 +3,19 @@ Acá iría el job paraQA
 esto es una pruebay
 */
 pipeline {
-    agent {
-        node {
-            docker.withServer('tcp://host.docker.internal:2376','docker_swarm_vagrant'){
-                docker.image('iaogt/demorails:1.3').withRun('-p 3000:3000 -u root:root'){
-                    /* waiting */
-                }
-            }
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
-                timeout(8){
-                    echo 'Waiting for server 1 ....'
-                    script {
+                script {
+                    echo 'Building...'
+                    timeout(8){
+                        echo 'Waiting for server 1 ....'
+                        docker.withServer('tcp://host.docker.internal:2376','docker_swarm_vagrant'){
+                            docker.image('iaogt/demorails:1.3').withRun('-p 3000:3000 -u root:root'){
+                                /* waiting */
+                            }
+                        }
                         def res = sh returnStdout: true, script: 'wget --retry-connrefused --tries=480 --waitretry=1 http://localhost:3000/pedidos -O /dev/null'
                         echo res
                         echo 'Testing ....'
