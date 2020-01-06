@@ -4,8 +4,12 @@ esto es una pruebay
 */
 pipeline {
     agent {
-        docker.withServer('tcp://host.docker.internal:2376','docker_swarm_vagrant') {
-            docker.image('iaogt/demorails:1.3').withRun('-p 3000:3000 -u root:root')
+        node {
+            docker.withServer('tcp://host.docker.internal:2376','docker_swarm_vagrant'){
+                docker.image('iaogt/demorails:1.3').withRun('-p 3000:3000 -u root:root'){
+                    /* waiting */
+                }
+            }
         }
     }
     stages {
