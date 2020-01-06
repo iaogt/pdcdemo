@@ -14,11 +14,10 @@ pipeline {
                     withDockerContainer(args: '-p 3000:3000 -u root:root', image: 'iaogt/demorails:1.3') {
                         timeout(8){
                             echo 'Waiting for server 1 ....'
-                            def res = sh returnStdout: true, script: 'wget --retry-connrefused --tries=480 --waitretry=1 http://localhost:3000/pedidos -O /dev/null'
-                            echo res
-                            echo 'Testing ....'
                             script {
-                                sh ''
+                                def res = sh returnStdout: true, script: 'wget --retry-connrefused --tries=480 --waitretry=1 http://localhost:3000/pedidos -O /dev/null'
+                                echo res
+                                echo 'Testing ....'
                                 def output = sh returnStdout: true, script: '/usr/src/app/demo/rails test'
                                 def numTests = (output =~ /(0-9)+ tests,$/ )
                                 def numAssert = (output =~ /(0-9)+ assertions,$/ )
