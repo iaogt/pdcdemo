@@ -2,6 +2,7 @@
 Acá iría el job paraQA
 esto es una pruebay
 */
+def dockerid
 pipeline {
     agent any
     stages {
@@ -9,7 +10,7 @@ pipeline {
             steps {
                 withCredentials ([file(credentialsId:'key_swarm',variable:'key_s'),file(credentialsId:'cert_s',variable:'server_cs'),file(credentialsId:'ca_s',variable:'client_c')]){
                     script{
-                        def dockerid = sh returnStdout:true,script:'docker --tlsverify --tlscacert=$client_c --tlscert=$server_cs --tlskey=$key_s -H=tcp://host.docker.internal:2376 run -d -p 3000:3000 iaogt/demorails:1.3'
+                        dockerid = sh returnStdout:true,script:'docker --tlsverify --tlscacert=$client_c --tlscert=$server_cs --tlskey=$key_s -H=tcp://host.docker.internal:2376 run -d -p 3000:3000 iaogt/demorails:1.3'
                         dockerid = dockerid.trim()
                         sh "docker --tlsverify --tlscacert=$client_c --tlscert=$server_cs --tlskey=$key_s -H=tcp://host.docker.internal:2376 exec $dockerid wget --retry-connrefused --tries=100 --waitretry=5 http://localhost:3000/pedidos -O /dev/null"
                     }
