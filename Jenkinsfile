@@ -17,7 +17,6 @@ pipeline {
                         def numAssert = (output =~ /(0-9)+ assertions,$/ )
                         def numFails = (output =~ /(0-9)+ failures,$/ )
                         def numErrors = (output =~ /(0-9)+ errors,$/ )
-                        def numSkips = (output =~ /(0-9)+ skips,$/ )
                         echo "$output"
                     }
                 }
