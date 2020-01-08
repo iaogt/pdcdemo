@@ -21,7 +21,7 @@ pipeline {
             steps {
                 withCredentials ([file(credentialsId:'key_swarm',variable:'key_s'),file(credentialsId:'cert_s',variable:'server_cs'),file(credentialsId:'ca_s',variable:'client_c')]){
                     script{
-                        def output = sh returnStdout:true,script:"docker --tlsverify --tlscacert=$client_c --tlscert=$server_cs --tlskey=$key_s -H=tcp://host.docker.internal:2376 exec $dockerid /usr/src/app/demo/rails test"
+                        def output = sh returnStdout:true,script:"docker --tlsverify --tlscacert=$client_c --tlscert=$server_cs --tlskey=$key_s -H=tcp://host.docker.internal:2376 exec $dockerid /usr/src/app/demo/bin/rails test"
                         def numSkips = (output =~ /(0-9)+ skips,$/ )	                                
                         def numTests = (output =~ /(0-9)+ tests,$/ )
                         def numAssert = (output =~ /(0-9)+ assertions,$/ )
