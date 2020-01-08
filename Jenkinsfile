@@ -33,7 +33,9 @@ pipeline {
                 }
             }
         }
-        stage('...Releasing environment') {
+    }
+    post{
+        always {
             steps {
                 withCredentials ([file(credentialsId:'key_swarm',variable:'key_s'),file(credentialsId:'cert_s',variable:'server_cs'),file(credentialsId:'ca_s',variable:'client_c')]){
                     script{
