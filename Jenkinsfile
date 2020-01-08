@@ -28,7 +28,10 @@ pipeline {
                         def (numAssert) = (output =~ /(\d)+ assertions,/ )
                         def (numFails) = (output =~ /(\d)+ failures,/ )
                         def (numErrors) = (output =~ /(\d)+ errors,/ )
-                        echo "Resultados: $numSkips - $numTests - $numAssert - $numFails - $numErrors"
+                        def cantErrors = numErrors[1].toInteger()
+                        if (cantErrors>0){
+                            error("Fallaron ${numErrors[1]} tests")
+                        }
                     }
                 }
             }
