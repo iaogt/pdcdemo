@@ -23,11 +23,11 @@ pipeline {
                     script{
                         def output = sh returnStdout:true,script:"docker --tlsverify --tlscacert=$client_c --tlscert=$server_cs --tlskey=$key_s -H=tcp://host.docker.internal:2376 exec $dockerid /usr/src/app/demo/bin/rails test"
                         echo "$output"
-                        def (numSkips) = (output =~ /(0-9)+ skips,$/ )	                                
-                        def (numTests) = (output =~ /(0-9)+ tests,$/ )
-                        def (numAssert) = (output =~ /(0-9)+ assertions,$/ )
-                        def (numFails) = (output =~ /(0-9)+ failures,$/ )
-                        def (numErrors) = (output =~ /(0-9)+ errors,$/ )
+                        def (numSkips) = (output =~ /(\d)+ skips,/ )	                                
+                        def (numTests) = (output =~ /(\d)+ tests,/ )
+                        def (numAssert) = (output =~ /(\d)+ assertions,/ )
+                        def (numFails) = (output =~ /(\d)+ failures,/ )
+                        def (numErrors) = (output =~ /(\d)+ errors,/ )
                         echo "Resultados: $numSkips - $numTests - $numAssert - $numFails - $numErrors"
                     }
                 }
